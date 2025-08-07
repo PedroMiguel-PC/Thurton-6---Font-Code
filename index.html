@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Thurton 6 – Choco Lake</title>
+  <style>
+    body { margin: 0; display: flex; flex-direction: column; height: 100vh; font-family: sans-serif; background: #1e1e1e; }
+    #controls {
+      display: flex;
+      gap: 5px;
+      background: #2e2e2e;
+      padding: 5px;
+      color: white;
+    }
+    #url {
+      flex: 1;
+      padding: 4px;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      background: #3e3e3e;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #555;
+    }
+    webview {
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="controls">
+    <button onclick="goBack()">◀</button>
+    <button onclick="goForward()">▶</button>
+    <input id="url" value="https://www.google.com" onkeydown="if(event.key==='Enter') navigate()">
+    <button onclick="navigate()">Ir</button>
+  </div>
+  <webview id="webview" src="https://www.google.com" style="width:100%; height:100%;"></webview>
+
+  <script>
+    const webview = document.getElementById('webview');
+    const urlInput = document.getElementById('url');
+
+    function navigate() {
+      let url = urlInput.value.trim();
+      if (!url.startsWith('http')) {
+        url = 'https://' + url;
+      }
+      webview.loadURL(url);
+    }
+
+    function goBack() {
+      if (webview.canGoBack()) webview.goBack();
+    }
+
+    function goForward() {
+      if (webview.canGoForward()) webview.goForward();
+    }
+
+    webview.addEventListener('did-navigate', () => {
+      urlInput.value = webview.getURL();
+    });
+  </script>
+</body>
+</html>
