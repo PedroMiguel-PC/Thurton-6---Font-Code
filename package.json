@@ -1,0 +1,14 @@
+{
+  "name": "thurton6",
+  "version": "1.0.0",
+  "description": "Navegador Thurton 6 com Electron - tema chocolate",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Pedro Miguel",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^30.0.0"
+  }
+}
